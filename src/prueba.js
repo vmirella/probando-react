@@ -6,7 +6,8 @@ const ul = (<ul className ='container'>
   <li>Hola Chau</li>
   <li>Hola2</li>
   <li>Hola2</li>
-
+  <li></li>
+  <li></li>
 </ul>)
 
 li.propTypes = {
