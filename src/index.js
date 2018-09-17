@@ -9,27 +9,26 @@ import registerServiceWorker from './registerServiceWorker';
 const data = {
   user: null,
   email: null,
-  password: '123456',
-  login : false
+  password: 'null',
+  register : false
 }
 //Variable que tendrá el contenido jsx que variará según cambien los procesos
 let App;
+let emailLogin;
+let passwordLogin;
 
 const handleSubmit = (e) => {
   e.preventDefault();
   data.user = e.target.children[0].value;
   data.email = e.target.children[1].value;
-  if(e.target.children[2].value === data.password){
-   App = (
-    <div>
-      <h1>Empezando con React ? </h1>
-      <h2>Bienvenido {data.user}</h2>
-      <p>Cualquier información te la enviaremos sobre React te la enviareamos a {data.email}</p>
-    </div>
-   )
+  data.password = e.target.children[2].value;
+  if(e.target.children[2].value !== ''){
+    {alert('Ud ya puede ingresar ha sido registrado con éxito.')} 
+    App = Welcome
+   
    ReactDOM.render(App, document.getElementById('root'));
   } else {
-   alert('La contraseña es invalida')
+   alert('No se ha podido registrar')
   }
 } 
 
@@ -42,9 +41,9 @@ const Form = (
    </form>
   )
 
-const handleOnclickLogin = () => {
-  data.login = true;
-  if(data.login){
+const handleOnclickRegister = () => {
+  data.register = true;
+  if(data.register){
    App = (
     <div>
       <h1>Ingresa tus datos por favor</h1>
@@ -55,11 +54,41 @@ const handleOnclickLogin = () => {
   ReactDOM.render(App, document.getElementById('root'));
 };
 
+const handleOnclickLogin = (e) => {
+  e.preventDefault();
+  emailLogin = e.target.children[0].value;
+  passwordLogin = e.target.children[1].value;
+  if(data.email === emailLogin && data.password === passwordLogin){
+   App = (
+    <div>
+      <h1>Empezando con React ? </h1>
+      <h2>Bienvenido {data.user}</h2>
+      <p>Cualquier información te la enviaremos sobre React te la enviareamos a {data.email}</p>
+    </div>
+   )
+   ReactDOM.render(App, document.getElementById('root'));
+  } else {
+   alert('El password o el email no es correcto')
+  }
+};
+
+const formLogin = (e) => {
+  e.preventDefault();
+   App = (
+    <form action="#" onSubmit={handleOnclickLogin}>
+       <input type="email" placeholder="email" />
+       <input type="password" placeholder="Password" />
+       <input type="submit" />
+   </form>
+   )
+   ReactDOM.render(App, document.getElementById('root'));
+};
 const Welcome = (
   <div>
   <h1>Bienvenido a React</h1>
-  <p>Para poder ingresar deberas logearte</p>
-  <button onClick = {handleOnclickLogin}>Login</button>
+  <button onClick = {formLogin}>Ingresar</button>
+  <p>Para poder ingresar deberas registrarte</p>
+  <button onClick = {handleOnclickRegister}>Registrarte</button>
  </div>
 )
 
